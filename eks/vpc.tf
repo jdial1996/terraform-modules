@@ -1,36 +1,32 @@
-# Create VPC - virtual data center for our kubernetes cluster 
-
-# 
-# EKS requires:
-
-# 1. VPC supports DNS : enable dns_support and dns_hostname 
-# 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 
 
-resource "aws_vpc" "main" {
+module "vpc" {
 
-  # cidr block for VPC
-  cidr_block = "192.168.0.0/16"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.12.0"
+  name    = "my-vpc"
+  cidr    = "10.0.0.0/16"
 
-  # Make your instances shared on the host using value of default 
-  instance_tenancy = "default"
+  azs             = data.aws_availability_zones.available.names
+  private_subnets = var.private_subnet_cidrs
+  public_subnets  = var.public_subnet_cidrs
 
-  # enable/disable dns support in vpc - EKS requirement
-  enable_dns_support = true
+  enable_nat_gateway   = var.enable_ha_nat_gateway # enable k8s worklaods in private subnets to communicate with internet
+  single_nat_gateway   = var.single_nat_gateway # will only create a nat gateway in a single AZ 
+  enable_dns_hostnames = true # means that worker nodes will have hostnames assigned to them (public oens only? )
+  enable_dns_support   = true
 
-  # enable/disable dns hostnames in vpc - EKS requirement
-  enable_dns_hostnames = true
-
-  enable_classiclink_dns_support = false
-
-  tags = {
-    Name = "main"
+  public_subnet_tags = {
+    "kubernetes.io/${var.eks_cluster_name}" = "shared"
+    "kubernetes.io/role/elb"            = "1"
   }
 
+  private_subnet_tags = {
+    "kubernetes.io/${var.eks_cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"   = "1"
+  }
 }
 
-output "vpc_id" {
-  value       = aws_vpc.main.id
-  description = "VPC id"
-  sensitive   = false
-}
