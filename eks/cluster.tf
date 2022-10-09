@@ -36,3 +36,11 @@ module "eks" {
   }
 }
   
+# Create dummy service and then public loadbalancer
+
+# create dummy service
+#  k8s provider
+# create public ingress resource to create loadbalancer
+#   k8s provider ingress resource
+# create dns records for path based urls
+#   ingress class? 
