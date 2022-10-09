@@ -53,4 +53,10 @@ variable "dd_api_key" {
 
 variable "datadog" {
   default = false
+  
+}
+
+variable "alb-controller" {
+  default = true
+
 }
