@@ -46,3 +46,11 @@ variable "node_group" {
   }
 
 }
+
+variable "dd_api_key" {
+  default = ""
+}
+
+variable "datadog" {
+  default = false
+}

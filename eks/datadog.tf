@@ -6,6 +6,7 @@
 # view kubernetes related data in Datadog
 
 resource "helm_release" "datadog" {
+  count = var.datadog ? 1 : 0
   name       = "datadog"
   repository = "https://helm.datadoghq.com"
   chart      = "datadog"
@@ -17,6 +18,6 @@ resource "helm_release" "datadog" {
 
   set {
     name  = "datadog.apiKey"
-    value = ""
+    value = var.dd_api_key
   }
 }
