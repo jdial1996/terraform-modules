@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata: 
+  name: self-signed-certificate
+  namespace: cert-manager-test
+spec: 
+  dnsNames: 
+  - example.com
+  # k8s will create this secret if it does not exist
+  secretName: selfsigned-cert-tls
+  issuerRef:
+    name: self-signed-issuer
