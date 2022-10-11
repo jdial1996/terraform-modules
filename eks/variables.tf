@@ -58,5 +58,8 @@ variable "datadog" {
 
 variable "alb-controller" {
   default = true
+}
 
+variable "cert-manager" {
+  default = true
 }
