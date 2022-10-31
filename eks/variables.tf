@@ -40,7 +40,7 @@ variable "node_group" {
   default = {
     "min" = 1
     "desired" = 1
-    "max" = 2
+    "max" = 5
     "instance_type" = "t2.small"
     "capacity_type"   = "ON_DEMAND"
   }
@@ -57,9 +57,24 @@ variable "datadog" {
 }
 
 variable "alb-controller" {
-  default = true
+  default = false
 }
 
 variable "cert-manager" {
+  default = false
+}
+
+variable "cluster-autoscaler" {
   default = true
+}
+
+
+################
+
+variable "vpc_cidr_range" {
+  default = "10.0.0.0/16"
+}
+
+variable "vpc_name" {
+  default = "main"
 }

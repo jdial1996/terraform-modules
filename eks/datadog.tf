@@ -5,19 +5,19 @@
 # You will also have to install the Kubernetes datadog integration in the datadog console to be able to 
 # view kubernetes related data in Datadog
 
-resource "helm_release" "datadog" {
-  count = var.datadog ? 1 : 0
-  name       = "datadog"
-  repository = "https://helm.datadoghq.com"
-  chart      = "datadog"
-  version    = "3.1.3"
+# resource "helm_release" "datadog" {
+#   count = var.datadog ? 1 : 0
+#   name       = "datadog"
+#   repository = "https://helm.datadoghq.com"
+#   chart      = "datadog"
+#   version    = "3.1.3"
 
-  values = [
-    "${file("values/datadog-values.yaml")}"
-  ]
+#   values = [
+#     "${file("values/datadog-values.yaml")}"
+#   ]
 
-  set {
-    name  = "datadog.apiKey"
-    value = var.dd_api_key
-  }
-}
+#   set {
+#     name  = "datadog.apiKey"
+#     value = var.dd_api_key
+#   }
+# }
