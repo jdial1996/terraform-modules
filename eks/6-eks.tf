@@ -46,3 +46,27 @@ resource "aws_eks_cluster" "eks-cluster" {
     depends_on = [aws_iam_role_policy_attachment.eks-cluster-policy]
 
 }
+
+
+resource "kubernetes_config_map" "aws-auth" {
+  data = {
+    "mapRoles" = <<-EOT
+                - groups:
+                  - system:bootstrappers
+                  - system:nodes
+                  rolearn: arn:aws:iam::421716472970:role/eks-node-group-role
+                  username: system:node:{{EC2PrivateDNSName}}
+            EOT
+    "mapUsers" = <<-EOT
+                - userarn:  arn:aws:iam::421716472970:user/gha-role
+                  username: rbac-user
+                  groups:
+                  - system:masters
+            EOT
+  }
+
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
+}
