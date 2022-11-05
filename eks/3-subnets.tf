@@ -48,7 +48,7 @@ resource "aws_subnet" "public-eu-west-2a" {
 
     tags = {
         "Name" = "public-eu-west-2a"
-        "kubernetes.io/cluster/role/elb" = "1"  # instructs k8s to create public loadbalancers in these subnets
+        "kubernetes.io/role/elb" = "1"  # instructs k8s to create public loadbalancers in these subnets
         "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
     }
 }
@@ -62,7 +62,7 @@ resource "aws_subnet" "public-eu-west-2b" {
 
     tags = {
         "Name" = "public-eu-west-2b"
-        "kubernetes.io/cluster/role/elb" = "1"
+        "kubernetes.io/role/elb" = "1"
         "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
     }
 }
@@ -76,7 +76,7 @@ resource "aws_subnet" "public-eu-west-2c" {
  
     tags = {
         "Name" = "public-eu-west-2c"
-        "kubernetes.io/cluster/role/elb" = "1"
+        "kubernetes.io/role/elb" = "1"
         "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
     }
 }
