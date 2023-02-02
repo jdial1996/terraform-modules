@@ -10,13 +10,22 @@ terraform {
       source = "hashicorp/kubernetes"
       version = "2.14.0"
     }
+    datadog = {
+      source = "DataDog/datadog"
+    }
   }
   required_version = ">= 0.12.0"
 }
 
 provider "aws" {
   version = ">= 2.28.1"
-  region  = "eu-west-2"
+  region  = "eu-west-1"
+}
+
+provider "datadog" {
+  api_key = "aa07fbdc96b178ca6d61efc3eaa4ce06"
+  app_key = "49d150fb892557a952081d530a2af623558943ca"
+  api_url =  "https://api.datadoghq.eu/"
 }
 
 provider "helm" {

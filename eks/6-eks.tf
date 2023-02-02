@@ -30,6 +30,7 @@ resource "aws_eks_cluster" "eks-cluster" {
     role_arn = aws_iam_role.eks-cluster-role.arn
     name = var.eks_cluster_name
     version = var.eks_cluster_version
+    enabled_cluster_log_types = ["audit"]
     #  subnets in which nodes and load balancers will be created
     vpc_config {
         subnet_ids = [
