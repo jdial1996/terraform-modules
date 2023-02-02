@@ -141,3 +141,11 @@ resource "aws_launch_template" "github_action_runner" {
 		Type = "terraform"
 	}
 }
+
+output "runner_public_ip" {
+  value = aws_instance.gha_runner.public_ip
+}
+
+output "runner_private_ip" {
+  value = aws_instance.gha_runner.private_ip
+}

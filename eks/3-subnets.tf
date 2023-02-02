@@ -5,7 +5,7 @@
 resource "aws_subnet" "private-eu-west-2a" {
     vpc_id = aws_vpc.main.id
     cidr_block = "10.0.0.0/25"
-    availability_zone = "eu-west-2a"
+    availability_zone = "eu-west-1a"
 
     tags = {
         "Name" = "private-eu-west-2a"
@@ -17,7 +17,7 @@ resource "aws_subnet" "private-eu-west-2a" {
 resource "aws_subnet" "private-eu-west-2b" {
     vpc_id = aws_vpc.main.id
     cidr_block = "10.0.0.128/25"
-    availability_zone = "eu-west-2b"
+    availability_zone = "eu-west-1b"
 
     tags = {
         "Name" = "private-eu-west-2b"
@@ -29,7 +29,7 @@ resource "aws_subnet" "private-eu-west-2b" {
 resource "aws_subnet" "private-eu-west-2c" {
     vpc_id = aws_vpc.main.id
     cidr_block = "10.0.1.0/25"
-    availability_zone = "eu-west-2c"
+    availability_zone = "eu-west-1c"
 
 
     tags = {
@@ -42,7 +42,7 @@ resource "aws_subnet" "private-eu-west-2c" {
 resource "aws_subnet" "public-eu-west-2a" {
     vpc_id = aws_vpc.main.id
     cidr_block = "10.0.1.128/25"
-    availability_zone = "eu-west-2a"
+    availability_zone = "eu-west-1a"
     map_public_ip_on_launch = true   # only set to true if you need to create public nodes.  Each publuc worker node will get an ip attached to it
 
 
@@ -56,7 +56,7 @@ resource "aws_subnet" "public-eu-west-2a" {
 resource "aws_subnet" "public-eu-west-2b" {
     vpc_id = aws_vpc.main.id
     cidr_block = "10.0.2.0/25"
-    availability_zone = "eu-west-2b"
+    availability_zone = "eu-west-1b"
     map_public_ip_on_launch = true 
 
 
@@ -70,7 +70,7 @@ resource "aws_subnet" "public-eu-west-2b" {
 resource "aws_subnet" "public-eu-west-2c" {
     vpc_id = aws_vpc.main.id
     cidr_block = "10.0.2.128/25"
-    availability_zone = "eu-west-2c"
+    availability_zone = "eu-west-1c"
     map_public_ip_on_launch = true 
 
  

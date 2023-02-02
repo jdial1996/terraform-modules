@@ -30,3 +30,7 @@ resource "aws_security_group" "bastion_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+output "bastion_ip" {
+  value = aws_instance.bastion.public_ip
+}
