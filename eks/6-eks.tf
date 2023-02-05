@@ -49,25 +49,25 @@ resource "aws_eks_cluster" "eks-cluster" {
 }
 
 
-resource "kubernetes_config_map" "aws-auth" {
-  data = {
-    "mapRoles" = <<-EOT
-                - groups:
-                  - system:bootstrappers
-                  - system:nodes
-                  rolearn: arn:aws:iam::421716472970:role/eks-node-group-role
-                  username: system:node:{{EC2PrivateDNSName}}
-            EOT
-    "mapUsers" = <<-EOT
-                - userarn:  arn:aws:iam::421716472970:user/gha-role
-                  username: rbac-user
-                  groups:
-                  - system:masters
-            EOT
-  }
+# resource "kubernetes_config_map" "aws-auth" {
+#   data = {
+#     "mapRoles" = <<-EOT
+#                 - groups:
+#                   - system:bootstrappers
+#                   - system:nodes
+#                   rolearn: arn:aws:iam::421716472970:role/eks-node-group-role
+#                   username: system:node:{{EC2PrivateDNSName}}
+#             EOT
+#     "mapUsers" = <<-EOT
+#                 - userarn:  arn:aws:iam::421716472970:user/gha-role
+#                   username: rbac-user
+#                   groups:
+#                   - system:masters
+#             EOT
+#   }
 
-  metadata {
-    name      = "aws-auth"
-    namespace = "kube-system"
-  }
-}
+#   metadata {
+#     name      = "aws-auth"
+#     namespace = "kube-system"
+#   }
+# }
