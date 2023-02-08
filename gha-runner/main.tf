@@ -1,8 +1,3 @@
-
-# Move GHA instance into private subnet 
-    # - add NAT gateway
-    # - make new subnet private by making sure it has a route to the NAT gateway 
-
 resource "aws_vpc" "main"  {
     cidr_block = "10.0.0.0/16"
 
@@ -125,17 +120,12 @@ resource "aws_instance" "gha_runner" {
   }
 }
 
-resource "aws_key_pair" "aws_key" {
-  key_name   = "aws_key"
-  public_key = var.aws_key
-}
-
 resource "aws_launch_template" "github_action_runner" {
     name = "github_runner_launch_template"
     image_id = "ami-05e786af422f8082a"
     instance_type = "t2.micro"
     user_data = base64encode(templatefile("scripts/user-data.sh", {personal_access_token = var.personal_access_token, github_user = var.github_user, github_repo = var.github_repo}))
-    key_name = aws_key_pair.aws_key.id
+    key_name = aws_key_pair.key_pair.id
     tags = {
 		Name = "GitHub-Runner"	
 		Type = "terraform"
