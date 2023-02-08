@@ -3,14 +3,13 @@ resource "aws_instance" "bastion" {
   subnet_id = aws_subnet.public-eu-west-1a.id
   ami = "ami-05e786af422f8082a"
   associate_public_ip_address = true
-  key_name = aws_key_pair.aws_key.id
+  key_name = aws_key_pair.key_pair.id
   instance_type = "t2.micro"
   tags = {
     Name = "Bastion"	
     Type = "terraform"
   }
 }
-
 
 resource "aws_security_group" "bastion_sg" {
   name   = "bastion-security-group"
