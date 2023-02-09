@@ -2,7 +2,7 @@
 
 set -x 
 
-sudo apt-get update && sudo apt-get install jq curl -y
+sudo apt-get update && sudo apt-get install jq curl uuid-runtime -y 
 
 cd /home/ubuntu 
 
@@ -16,7 +16,9 @@ sudo chown -R ubuntu:ubuntu .
 
 runner_token=$(jq -r '.token' output.txt)
 
-RUNNER_ALLOW_RUNASROOT="1" ./config.sh --url https://github.com/${github_user}/${github_repo} --token $runner_token --name "Github EC2 Runner 50" --unattended --labels self-hosted,gpu 
+runner_id = $(uuidgen)
+
+RUNNER_ALLOW_RUNASROOT="1" ./config.sh --url https://github.com/${github_user}/${github_repo} --token $runner_token --name runner-$runner_id --unattended --labels self-hosted,gpu 
 
 sudo chown -R ubuntu:ubuntu
 

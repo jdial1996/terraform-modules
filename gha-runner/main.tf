@@ -132,6 +132,18 @@ resource "aws_launch_template" "github_action_runner" {
 	}
 }
 
+resource "aws_autoscaling_group" "gha_asg" {
+  name                 = "github-actions-asg"
+  max_size             = 5
+  min_size             = 2
+  launch_template {
+    id      = aws_launch_template.github_action_runner.id
+    version = aws_launch_template.github_action_runner.latest_version
+  }
+  vpc_zone_identifier  = [aws_subnet.private-eu-west-1a.id]
+
+}
+
 output "runner_public_ip" {
   value = aws_instance.gha_runner.public_ip
 }
