@@ -3,20 +3,20 @@
 # NAT Gateway needs a fixed ip (elastic ip)
 
 resource "aws_eip" "nat" {
-    vpc = true 
+  vpc = true
 
-    tags = {
-        name = "nat"
-    }
+  tags = {
+    name = "nat"
+  }
 }
 
 resource "aws_nat_gateway" "nat" {
-    allocation_id  = aws_eip.nat.id
-    subnet_id = aws_subnet.public-eu-west-2a.id
-    
-    tags = {
-        name = "nat"
-    }
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public-eu-west-1a.id
 
-    depends_on = [aws_internet_gateway.main_igw]
+  tags = {
+    name = "nat"
+  }
+
+  depends_on = [aws_internet_gateway.main_igw]
 }
