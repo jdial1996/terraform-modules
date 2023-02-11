@@ -9,19 +9,19 @@ resource "kubernetes_service_account" "aws_albic_sa" {
     namespace = "kube-system"
     annotations = {
       "eks.amazonaws.com/role-arn" : "arn:aws:iam::421716472970:role/alb-controller"
-  }
+    }
 
-}
+  }
 }
 
 
 resource "helm_release" "alb-controller" {
-  count = var.alb-controller ? 1 : 0
+  count      = var.alb-controller ? 1 : 0
   name       = "alb-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
   version    = "1.4.5"
-  namespace = "kube-system"
+  namespace  = "kube-system"
 
   set {
     name  = "clusterName"
