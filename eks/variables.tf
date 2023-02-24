@@ -4,6 +4,11 @@ variable "eks_cluster_name" {
   default = "playground-cluster"
 }
 
+variable "cluster_log_types" {
+  type = list(string)
+  default = ["audit"]
+}
+
 variable "eks_cluster_version" {
   description = "The version of the Kubernetes Cluster"
   default     = "1.21"
@@ -12,12 +17,12 @@ variable "eks_cluster_version" {
 
 variable "private_subnet_cidrs" {
   type    = list(string)
-  default = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  default = ["10.0.0.0/25", "10.0.0.128/25", "10.0.1.0/25"]
 }
 
 variable "public_subnet_cidrs" {
   type    = list(string)
-  default = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+  default = ["10.0.1.128/25", "10.0.2.0/25", "10.0.2.128/25"]
 }
 
 variable "enable_ha_nat_gateway" {
@@ -35,10 +40,21 @@ variable "enable_irsa" {
   default = true
 }
 
+variable "max_nodes" {
+  default = 5
+}
+
+variable "min_nodes" {
+  default = 0 
+}
+
+variable "desired_nodes" {
+  default = 1
+}
 variable "node_group" {
   type = map(any)
   default = {
-    "min"           = 1
+    "min"           = 0
     "desired"       = 1
     "max"           = 5
     "instance_type" = "t2.small"
@@ -56,16 +72,24 @@ variable "datadog" {
 
 }
 
-variable "alb-controller" {
+variable "alb_controller_enabled" {
   default = false
 }
 
-variable "cert-manager" {
+variable "cert_manager_enabled" {
   default = false
 }
 
-variable "cluster-autoscaler" {
+variable "cluster_autoscaler_enabled" {
   default = true
+}
+
+variable "ebs_csi_enabled" {
+  default = false
+}
+
+variable "ebs_csi_version" {
+  default = "v1.11.4-eksbuild.1"
 }
 
 

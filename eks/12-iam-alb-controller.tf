@@ -22,8 +22,8 @@ resource "aws_iam_role" "aws_alb" {
 }
 
 resource "aws_iam_policy" "aws_alb" {
-  name   = "cluster_autoscaler"
-  policy = file("alb_iam_policy.json")
+  name   = "aws-alb"
+  policy = file(pathexpand("~/Documents/terraform/eks/alb_iam_policy.json"))
 
 }
 
