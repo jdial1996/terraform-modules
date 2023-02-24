@@ -30,7 +30,7 @@ resource "aws_eks_cluster" "eks-cluster" {
   role_arn                  = aws_iam_role.eks-cluster-role.arn
   name                      = var.eks_cluster_name
   version                   = var.eks_cluster_version
-  enabled_cluster_log_types = ["audit"]
+  enabled_cluster_log_types = var.cluster_log_types
   #  subnets in which nodes and load balancers will be created
   vpc_config {
     subnet_ids = [
@@ -51,26 +51,3 @@ resource "aws_eks_cluster" "eks-cluster" {
 output "eks_cluster_arn" {
   value = aws_eks_cluster.eks-cluster.arn
 }
-
-# resource "kubernetes_config_map" "aws-auth" {
-#   data = {
-#     "mapRoles" = <<-EOT
-#                 - groups:
-#                   - system:bootstrappers
-#                   - system:nodes
-#                   rolearn: arn:aws:iam::421716472970:role/eks-node-group-role
-#                   username: system:node:{{EC2PrivateDNSName}}
-#             EOT
-#     "mapUsers" = <<-EOT
-#                 - userarn:  arn:aws:iam::421716472970:user/gha-role
-#                   username: rbac-user
-#                   groups:
-#                   - system:masters
-#             EOT
-#   }
-
-#   metadata {
-#     name      = "aws-auth"
-#     namespace = "kube-system"
-#   }
-# }

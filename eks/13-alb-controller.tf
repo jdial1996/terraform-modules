@@ -16,7 +16,7 @@ resource "kubernetes_service_account" "aws_albic_sa" {
 
 
 resource "helm_release" "alb-controller" {
-  count      = var.alb-controller ? 1 : 0
+  count      = var.alb_controller_enabled ? 1 : 0
   name       = "alb-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"

@@ -54,9 +54,9 @@ resource "aws_eks_node_group" "private_nodes" {
   capacity_type = "ON_DEMAND"
   # EKS by itself will not autosclae your nodes.  We also need to deploy the cluster autoscaler.  We can however define minimum and maximum number of nodes
   scaling_config {
-    desired_size = 1
-    max_size     = 5
-    min_size     = 0
+    desired_size = var.desired_nodes
+    max_size     = var.max_nodes
+    min_size     = var.min_nodes
   }
 
   update_config {
