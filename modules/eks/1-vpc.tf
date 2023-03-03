@@ -1,5 +1,5 @@
 module "vpc" {
-  # source =  "git::git@github.com:jdial1996/terraform.git//modules/vpc?ref=v0.2.0"
+  source =  "git::git@github.com:jdial1996/terraform.git//modules/vpc?ref=v0.3.0"
   source = "../vpc"
   environment = "staging"
   public_subnet_tags = {
