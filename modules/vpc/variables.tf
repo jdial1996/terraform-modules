@@ -30,7 +30,7 @@ variable "private_subnet_numbers" {
 }
 
 variable "public_subnet_tags" {
-    type = map
+    type = map(string)
     description = "Additional tags for public subnets"
     default = {Environment = "staging"}
 }
