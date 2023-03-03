@@ -45,11 +45,7 @@ resource "aws_eks_node_group" "private_nodes" {
   cluster_name  = aws_eks_cluster.eks-cluster.name
   node_role_arn = aws_iam_role.nodes_role.arn
 
-  subnet_ids = [
-    aws_subnet.private-eu-west-1a.id,
-    aws_subnet.private-eu-west-1b.id,
-    aws_subnet.private-eu-west-1c.id
-  ]
+  subnet_ids = module.vpc.private_subnets
 
   capacity_type = "ON_DEMAND"
   # EKS by itself will not autosclae your nodes.  We also need to deploy the cluster autoscaler.  We can however define minimum and maximum number of nodes
@@ -81,4 +77,3 @@ resource "aws_eks_node_group" "private_nodes" {
 
 
 
-# start at 7:05

@@ -33,15 +33,7 @@ resource "aws_eks_cluster" "eks-cluster" {
   enabled_cluster_log_types = var.cluster_log_types
   #  subnets in which nodes and load balancers will be created
   vpc_config {
-    subnet_ids = [
-      aws_subnet.private-eu-west-1a.id,
-      aws_subnet.private-eu-west-1b.id,
-      aws_subnet.private-eu-west-1c.id,
-      aws_subnet.public-eu-west-1a.id,
-      aws_subnet.public-eu-west-1b.id,
-      aws_subnet.public-eu-west-1c.id,
-
-    ]
+    subnet_ids = concat(module.vpc.public_subnets, module.vpc.private_subnets)
   }
 
   depends_on = [aws_iam_role_policy_attachment.eks-cluster-policy]
