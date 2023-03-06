@@ -10,8 +10,3 @@ module "vpc" {
     "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
   }
 }
-
-output "vpc" {
-
-  value = module.vpc
-}
