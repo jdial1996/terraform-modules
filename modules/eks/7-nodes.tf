@@ -37,6 +37,11 @@ resource "aws_iam_role_policy_attachment" "eks-worker-node-ecr-policy" {
   role       = aws_iam_role.nodes_role.name
 }
 
+resource "aws_iam_role_policy_attachment" "eks-worker-node-logs-policy" {
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+  role       = aws_iam_role.nodes_role.name
+}
+
 
 # NODEGROUPS
 
@@ -65,6 +70,8 @@ resource "aws_eks_node_group" "private_nodes" {
     role = "general"
   }
 }
+
+
 
 # taint= {}
 # }
