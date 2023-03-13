@@ -11,7 +11,7 @@ variable "cluster_log_types" {
 
 variable "eks_cluster_version" {
   description = "The version of the Kubernetes Cluster"
-  default     = "1.21"
+  default     = "1.22"
   type        = string
 }
 
@@ -72,6 +72,11 @@ variable "datadog" {
 
 }
 
+variable "cloudwatch_agent" {
+  default = false
+
+}
+
 variable "alb_controller_enabled" {
   default = false
 }
@@ -90,6 +95,10 @@ variable "ebs_csi_enabled" {
 
 variable "ebs_csi_version" {
   default = "v1.11.4-eksbuild.1"
+}
+
+variable "cloudwatch_agent_version" {
+  default = "0.0.8"
 }
 
 
