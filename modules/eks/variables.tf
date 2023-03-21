@@ -77,8 +77,20 @@ variable "cloudwatch_agent" {
 
 }
 
+variable "prometheus_enabled" {
+  default = true
+}
+
+variable "metrics_server_enabled" {
+  default = true
+}
+
+variable "metrics_server_version" {
+  default = "3.8.4"
+}
+
 variable "alb_controller_enabled" {
-  default = false
+  default = true
 }
 
 variable "cert_manager_enabled" {
